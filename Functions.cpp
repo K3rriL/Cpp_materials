@@ -1,3 +1,5 @@
+#include <iostream>
+
 int32_t sumOfDigits(int n, int sum)
 {
     if (n == 0) return sum;
@@ -151,6 +153,21 @@ void mergeSort(double* arr, int16_t arr_size)
         idx++;
         left_idx++;
     }
+
+    // copying left elements from the right side (if there is left something)
+    while (right_idx < right_size)
+    {
+        buffer[idx] = right[right_idx];
+        idx++;
+        right_idx++;
+    }
+
+    //copying buffer into original array
+    for (int i = 0; i < arr_size; i++)
+    {
+        arr[i] = buffer[i];
+    }
+    delete[] buffer;
 }
 
 int binSearch (int* arr, int n, int num)
@@ -169,19 +186,4 @@ int binSearch (int* arr, int n, int num)
     }
     return -1;
 }
-
-    // copying left elements from the right side (if there is left something)
-    while (right_idx < right_size)
-    {
-        buffer[idx] = right[right_idx];
-        idx++;
-        right_idx++;
-    }
-
-    //copying buffer into original array
-    for (int i = 0; i < arr_size; i++)
-    {
-        arr[i] = buffer[i];
-    }
-    delete[] buffer;
 
