@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 int32_t sumOfDigits(int n, int sum)
 {
@@ -55,10 +56,7 @@ void multipliers(int32_t n, int32_t now, float lim)
     return multipliers(n, now+1, lim);
 }
 
-int permutation[n]; // array for permutations
-bool used[n] = false;
-
-void permutations(int16_t len, int16_t idx, int16_t permutation[], bool used[])
+void permutations_rec(int32_t len, int32_t idx, int32_t permutation[], bool used[])
 {
     if (idx == len)
     {
@@ -72,14 +70,26 @@ void permutations(int16_t len, int16_t idx, int16_t permutation[], bool used[])
         {
             permutation[idx] = i;
             used[i] = true;
-            permutations(len, idx+1, permutation, used);
+            permutations_rec(len, idx+1, permutation, used);
             used[i] = false;
         }
         else continue;
     }
 }
 
-void bruteForce(int16_t len, int32_t left_bound, int32_t right_bound, int16_t pos, int* bruteforce)
+
+void permutations (int32_t len)
+{
+    int permutation[len];
+    bool used[len];
+    for (auto now : used)
+    {
+        now = false;
+    }
+    permutations_rec(len, 0, permutation, used);
+}
+
+void bruteForce(int32_t len, int32_t left_bound, int32_t right_bound, int32_t pos, int* bruteforce)
 {
     if (pos == len)
     {
@@ -94,7 +104,7 @@ void bruteForce(int16_t len, int32_t left_bound, int32_t right_bound, int16_t po
     }
 }
 
-void fastSort(int* a, int16_t left, int16_t right)
+void fastSort(int* a, int32_t left, int32_t right)
 {
     if (right - left <= 1) return;
     int32_t idx = left;
@@ -111,15 +121,15 @@ void fastSort(int* a, int16_t left, int16_t right)
     fastSort(a, idx+1, right);
 }
 
-void mergeSort(double* arr, int16_t arr_size)
+void mergeSort(double* arr, int32_t arr_size)
 {
     if (arr_size <= 1) return; // base  case
 
-    int16_t middle = arr_size / 2;
+    int32_t middle = arr_size / 2;
     double* left = arr;
     double* right = arr + middle;
-    int16_t left_size = middle;
-    int16_t right_size = arr_size - left_size;
+    int32_t left_size = middle;
+    int32_t right_size = arr_size - left_size;
 
     // recursion
     mergeSort(left, left_size);
@@ -127,7 +137,7 @@ void mergeSort(double* arr, int16_t arr_size)
 
     // merge 2 sorted parts of array;
     double* buffer = new double[arr_size];
-    int16_t left_idx = 0, right_idx = 0, idx = 0;
+    int32_t left_idx = 0, right_idx = 0, idx = 0;
     while (left_idx < left_size and right_idx < right_size)
     {
         if (left[left_idx] <= right[right_idx])
