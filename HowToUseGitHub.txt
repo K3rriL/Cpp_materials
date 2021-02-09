@@ -1,9 +1,12 @@
 Commands:
 
-git init "NameOfRepository" // in the current direcory
-git clone <UrlOfRepository>
-
-git add <filename>
-git commit -m "NameOfCommite"
-git push
+git init "NameOfRepository" // create repository in the current direcory
+git clone <UrlOfRepository> // download repository to the pc
+git pull // download everything left from the cloud repository (files which were not downloaded to the pc yet)
+git status // check status
+git add <filename> // add a new file 
+git add -A // add all new or changed files
+git commit -m "NameOfCommite" // make a commit whith "" name
+git push // push commit to the cloud
+git // to see all commands
 
